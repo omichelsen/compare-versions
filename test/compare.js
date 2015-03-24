@@ -23,6 +23,23 @@ describe('compare versions', function () {
         assert.equal(compare('1.0', '1.4.1'), -1);
     });
 
+    it('should compare pre-release versions', function () {
+        assert.equal(compare('1.0.0-alpha.1', '1.0.0-alpha'), 1);
+        assert.equal(compare('1.0.0-alpha', '1.0.0-alpha'), 0);
+        assert.equal(compare('1.0.0-alpha', '1.0.0-alpha.beta'), -1);
+        assert.equal(compare('1.0.0-alpha', '1.0.0-beta'), -1);
+    });
+
+    it('should give precendece to normal versions over pre-release', function () {
+        assert.equal(compare('1.0.0', '1.0.0-alpha'), 1);
+        assert.equal(compare('1.0.0-beta', '1'), -1);
+    });
+
+    it('should ignore build metadata', function () {
+        assert.equal(compare('1.4.0-build.3928', '1.4.0-build.3928+sha.a8d9d4f'), 0);
+        assert.equal(compare('1.4.0-build.3928+sha.b8dbdb0', '1.4.0-build.3928+sha.a8d9d4f'), 0);
+    });
+
     it('should sort versions', function () {
         var versions = [
             '1.2.3',

@@ -9,27 +9,37 @@
   }
 }(this, function () {
 
+    var patchPattern = /-([\w-.]+)/;
+
+    function split(v) {
+        var temp = v.split('.');
+        var arr = temp.splice(0, 2);
+        arr.push(temp.join('.'));
+        return arr;
+    }
+
     return function compareVersions(v1, v2) {
-        var s1 = v1.split('.');
-        var s2 = v2.split('.');
-        if (s1.length < s2.length) {
-            for (var i = s1.length; i < s2.length; i++) {
-                s1[i] = '0';
+        var s1 = split(v1);
+        var s2 = split(v2);
+
+        for (var i = 0; i < 3; i++) {
+            var n1 = parseInt(s1[i] || 0);
+            var n2 = parseInt(s2[i] || 0);
+
+            if (n1 > n2) return 1;
+            if (n2 > n1) return -1;
+
+            if (i === 2 && (s1[i] + s2[i]).indexOf('-') > -1) {
+                var p1 = (patchPattern.exec(s1[i]) || [''])[0];
+                var p2 = (patchPattern.exec(s2[i]) || [''])[0];
+
+                if (p1 === '') return 1;
+                if (p2 === '') return -1;
+                if (p1 > p2) return 1;
+                if (p2 > p1) return -1;
             }
         }
-        if (s2.length < s1.length) {
-            for (var j = s2.length; j < s1.length; j++) {
-                s2[j] = '0';
-            }
-        }
-        for (var k = 0; k < s1.length; ++k) {
-            if (Number(s1[k]) > Number(s2[k])) {
-                return 1;
-            }
-            if (Number(s1[k]) < Number(s2[k])) {
-                return -1;
-            }
-        }
+
         return 0;
     };
 
