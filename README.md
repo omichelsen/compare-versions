@@ -3,12 +3,18 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Compare semver version strings to find which is greater, equal or lesser. Runs in the browser as well as node.js/iojs.
+Compare [semver](http://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as node.js/iojs.
 
 ## Install
 
+Install with `bower` or `npm`:
+
 ```bash
 $ bower install compare-versions --save
+```
+
+```bash
+$ npm install compare-versions --save
 ```
 
 ## Usage
