@@ -24,8 +24,8 @@
         var s2 = split(v2);
 
         for (var i = 0; i < 3; i++) {
-            var n1 = parseInt(s1[i] || 0);
-            var n2 = parseInt(s2[i] || 0);
+            var n1 = parseInt(s1[i] || 0, 10);
+            var n2 = parseInt(s2[i] || 0, 10);
 
             if (n1 > n2) return 1;
             if (n2 > n1) return -1;
