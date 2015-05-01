@@ -1,3 +1,4 @@
+/* global define */
 (function (root, factory) {
     /* istanbul ignore next */
     if (typeof define === 'function' && define.amd) {
@@ -6,7 +7,7 @@
         module.exports = factory();
     } else {
         root.returnExports = factory();
-  }
+    }
 }(this, function () {
 
     var patchPattern = /-([\w-.]+)/;
