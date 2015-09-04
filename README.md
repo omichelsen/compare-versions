@@ -1,7 +1,7 @@
 # compare-versions
 
-[![Build Status][travis-image]][travis-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+[![Build Status](https://img.shields.io/travis/omichelsen/compare-versions/master.svg)](https://travis-ci.org/omichelsen/compare-versions)
+[![Coverage Status](https://coveralls.io/repos/omichelsen/compare-versions/badge.svg?branch=master&service=github)](https://coveralls.io/github/omichelsen/compare-versions?branch=master)
 
 Compare [semver](http://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as node.js/iojs.
 
@@ -49,8 +49,3 @@ Outputs:
     '1.5.19'
 ]
 ```
-
-[travis-image]: https://img.shields.io/travis/omichelsen/compare-versions/master.svg
-[travis-url]: https://travis-ci.org/omichelsen/compare-versions
-[coveralls-image]: https://img.shields.io/coveralls/omichelsen/compare-versions/master.svg
-[coveralls-url]: https://coveralls.io/r/omichelsen/compare-versions?branch=master
