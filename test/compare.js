@@ -39,30 +39,4 @@ describe('compare versions', function () {
         assert.equal(compare('1.4.0-build.3928', '1.4.0-build.3928+sha.a8d9d4f'), 0);
         assert.equal(compare('1.4.0-build.3928+sha.b8dbdb0', '1.4.0-build.3928+sha.a8d9d4f'), 0);
     });
-
-    it('should sort versions', function () {
-        var versions = [
-            '1.2.3',
-            '4.11.6',
-            '4.2.0',
-            '1.5.19',
-            '1.5.5',
-            '4.1.3',
-            '2.3.1',
-            '10.5.5',
-            '11.3.0'
-        ];
-
-        assert.deepEqual(versions.sort(compare), [
-            '1.2.3',
-            '1.5.5',
-            '1.5.19',
-            '2.3.1',
-            '4.1.3',
-            '4.2.0',
-            '4.11.6',
-            '10.5.5',
-            '11.3.0'
-        ]);
-    });
 });
