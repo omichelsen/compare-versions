@@ -5,16 +5,18 @@
 
 Compare [semver](http://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as node.js/iojs.
 
+This library supports the full semver specification, including comparing versions with different number of digits like `1.0.0`, `1.0`, `1`, and pre-release versions like `1.0.0-alpha`.
+
 ## Install
 
-Install with `bower` or `npm`:
-
-```bash
-$ bower install compare-versions --save
-```
+Install with `npm` or `bower`:
 
 ```bash
 $ npm install compare-versions --save
+```
+
+```bash
+$ bower install compare-versions --save
 ```
 
 ## Usage
