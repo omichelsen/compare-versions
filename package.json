@@ -22,7 +22,7 @@
   "author": "Ole Bjørn Michelsen <ole@michelsen.dk>",
   "license": "MIT",
   "devDependencies": {
-    "istanbul": "^0.3.8",
-    "mocha": "^2.2.1"
+    "istanbul": "~0.3.19",
+    "mocha": "~2.3.1"
   }
 }
