@@ -6,7 +6,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        root.returnExports = factory();
+        root.compareVersions = factory();
     }
 }(this, function () {
 
