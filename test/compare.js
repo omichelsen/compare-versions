@@ -2,10 +2,22 @@ var assert = require('assert');
 var compare = require('..');
 
 describe('compare versions', function () {
-    it('should compare versions correctly', function () {
+    it('should compare three-segment versions correctly', function () {
         assert.equal(compare('10.1.8', '10.0.4'),  1);
         assert.equal(compare('10.0.1', '10.0.1'),  0);
         assert.equal(compare('10.1.1', '10.2.2'), -1);
+    });
+
+    it('should compare two-segment versions correctly', function () {
+        assert.equal(compare('10.8', '10.4'),  1);
+        assert.equal(compare('10.1', '10.1'),  0);
+        assert.equal(compare('10.1', '10.2'), -1);
+    });
+
+    it('should compare single-segment versions correctly', function () {
+        assert.equal(compare('10', '9'),  1);
+        assert.equal(compare('10', '10'),  0);
+        assert.equal(compare('9', '10'), -1);
     });
 
     it('should compare versions with different number of digits in same group', function () {

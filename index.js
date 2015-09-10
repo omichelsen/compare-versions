@@ -31,6 +31,9 @@
             if (n2 > n1) return -1;
         }
 
+        s1[2] = s1[2] || '';
+        s2[2] = s2[2] || '';
+
         if ((s1[2] + s2[2]).indexOf('-') > -1) {
             var p1 = (patchPattern.exec(s1[2]) || [''])[0];
             var p2 = (patchPattern.exec(s2[2]) || [''])[0];
