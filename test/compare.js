@@ -1,5 +1,10 @@
 var assert = require('assert');
 var compare = require('..');
+var cmp = {
+    '1': '>',
+    '0': '=',
+    '-1': '<'
+};
 
 describe('compare versions', function () {
     it('should compare three-segment versions correctly', function () {
@@ -35,16 +40,21 @@ describe('compare versions', function () {
         assert.equal(compare('1.0', '1.4.1'), -1);
     });
 
-    it('should compare pre-release versions', function () {
-        assert.equal(compare('1.0.0-alpha.1', '1.0.0-alpha'), 1);
-        assert.equal(compare('1.0.0-alpha', '1.0.0-alpha'), 0);
-        assert.equal(compare('1.0.0-alpha', '1.0.0-alpha.beta'), -1);
-        assert.equal(compare('1.0.0-alpha', '1.0.0-beta'), -1);
-    });
-
-    it('should give precendece to normal versions over pre-release', function () {
-        assert.equal(compare('1.0.0', '1.0.0-alpha'), 1);
-        assert.equal(compare('1.0.0-beta', '1'), -1);
+    describe('pre-release versions', function () {
+        [
+            ['1.0.0-alpha', '1.0.0-alpha.1', -1],
+            ['1.0.0-alpha.1', '1.0.0-alpha.beta', -1],
+            ['1.0.0-alpha.beta', '1.0.0-beta', -1],
+            ['1.0.0-beta', '1.0.0-beta.2', -1],
+            ['1.0.0-beta.2', '1.0.0-beta.11', -1],
+            ['1.0.0-beta.11', '1.0.0-rc.1', -1],
+            ['1.0.0-rc.1', '1.0.0', -1],
+            ['1.0.0-alpha', '1', -1]
+        ].forEach(function (data) {
+            it('should return ' + data[0] + ' ' + cmp[data[2]] + ' ' + data[1], function () {
+                assert.equal(compare(data[0], data[1]), data[2]);
+            });
+        });
     });
 
     it('should ignore build metadata', function () {
