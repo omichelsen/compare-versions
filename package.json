@@ -23,6 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "istanbul": "^0.4.3",
-    "mocha": "^2.5.3"
+    "mocha": "^3.0.0"
   }
 }
