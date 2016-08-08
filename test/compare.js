@@ -61,4 +61,10 @@ describe('compare versions', function () {
         assert.equal(compare('1.4.0-build.3928', '1.4.0-build.3928+sha.a8d9d4f'), 0);
         assert.equal(compare('1.4.0-build.3928+sha.b8dbdb0', '1.4.0-build.3928+sha.a8d9d4f'), 0);
     });
+
+    describe('bad input', function () {
+        it('should compare bad input successfully', function () {
+            assert.notEqual(compare('1.0', 'foo'), 0);
+        });
+    });
 });
