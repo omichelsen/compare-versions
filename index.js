@@ -10,6 +10,7 @@
     }
 }(this, function () {
 
+    var semver = /^v?(?:0|[1-9]\d*)(\.(?:[x*]|0|[1-9]\d*)(\.(?:[x*]|0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?)?)?$/i;
     var patch = /-([0-9A-Za-z-.]+)/;
 
     function split(v) {
@@ -23,7 +24,18 @@
         return isNaN(Number(v)) ? v : Number(v);
     }
 
+    function validate(version) {
+        if (typeof version !== 'string') {
+            throw new TypeError('Invalid argument expected string');
+        }
+        if (!semver.test(version)) {
+            throw new Error('Invalid argument not valid semver');
+        }
+    }
+
     return function compareVersions(v1, v2) {
+        [v1, v2].forEach(validate);
+
         var s1 = split(v1);
         var s2 = split(v2);
 

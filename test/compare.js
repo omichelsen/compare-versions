@@ -42,6 +42,7 @@ describe('compare versions', function () {
 
     describe('pre-release versions', function () {
         [
+            ['1.0.0-alpha.1', '1.0.0-alpha', 1],
             ['1.0.0-alpha', '1.0.0-alpha.1', -1],
             ['1.0.0-alpha.1', '1.0.0-alpha.beta', -1],
             ['1.0.0-alpha.beta', '1.0.0-beta', -1],
@@ -60,5 +61,19 @@ describe('compare versions', function () {
     it('should ignore build metadata', function () {
         assert.equal(compare('1.4.0-build.3928', '1.4.0-build.3928+sha.a8d9d4f'), 0);
         assert.equal(compare('1.4.0-build.3928+sha.b8dbdb0', '1.4.0-build.3928+sha.a8d9d4f'), 0);
+    });
+
+    it('should throw on invalid input', function () {
+        [
+            [42, /Invalid argument expected string/],
+            [{}, /Invalid argument expected string/],
+            [[], /Invalid argument expected string/],
+            [function () {}, /Invalid argument expected string/],
+            ['6.3.', /Invalid argument not valid semver/],
+        ].forEach(function (data) {
+            assert.throws(function () {
+                compare(data[0], data[0]);
+            }, data[1]);
+        });
     });
 });
