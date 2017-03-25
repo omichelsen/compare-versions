@@ -14,7 +14,7 @@
     var patch = /-([0-9A-Za-z-.]+)/;
 
     function split(v) {
-        var temp = v.split('.');
+        var temp = v.replace(/^v/, '').split('.');
         var arr = temp.splice(0, 2);
         arr.push(temp.join('.'));
         return arr;
