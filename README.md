@@ -5,7 +5,7 @@
 
 Compare [semver](http://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as node.js/iojs.
 
-This library supports the full semver specification, including comparing versions with different number of digits like `1.0.0`, `1.0`, `1`, and pre-release versions like `1.0.0-alpha`. Also supports wildcards for minor and patch version like `1.0.x` or `1.0.*`.
+This library supports the full semver specification, including comparing versions with different number of digits like `1.0.0`, `1.0`, `1`, and pre-release versions like `1.0.0-alpha`. Also supports wildcards for minor and patch version like `1.0.x` or `1.0.*`. Any leading `v` is ignored.
 
 ## Install
 

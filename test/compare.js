@@ -63,6 +63,13 @@ describe('compare versions', function () {
         assert.equal(compare('1.4.0-build.3928+sha.b8dbdb0', '1.4.0-build.3928+sha.a8d9d4f'), 0);
     });
 
+    it('should ignore leading `v`', function () {
+        assert.equal(compare('v1.0.0', '1.0.0'), 0);
+        assert.equal(compare('v1.0.0', 'v1.0.0'), 0);
+        assert.equal(compare('v1.0.0', 'v1.0.0'), 0);
+        assert.equal(compare('v1.0.0-alpha', '1.0.0-alpha'), 0);
+    });
+
     it('should throw on invalid input', function () {
         [
             [42, /Invalid argument expected string/],
