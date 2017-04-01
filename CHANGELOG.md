@@ -1,5 +1,8 @@
 # Change Log
 
+## [3.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.0.0) - 2017-04-01
+- Fix for leading 'v'
+
 ## [3.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.0.0) - 2016-08-08
 - Validate input data.
 
