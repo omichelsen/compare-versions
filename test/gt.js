@@ -45,7 +45,8 @@ describe('greater than', function () {
             ['2.x.x', '1.1.3'],
             ['3.2.1', '2.3.2'],
             ['3.2.1', '3.2.0'],
-            ['v0.5.4-pre', '0.5.4-alpha']
+            ['v0.5.4-pre', '0.5.4-alpha'],
+            ['v3.2.1', 'v2.3.2']
         ].forEach(function (tuple) {
             var v1 = tuple[0];
             var v2 = tuple[1];
