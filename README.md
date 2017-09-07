@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/travis/omichelsen/compare-versions/master.svg)](https://travis-ci.org/omichelsen/compare-versions)
 [![Coverage Status](https://coveralls.io/repos/omichelsen/compare-versions/badge.svg?branch=master&service=github)](https://coveralls.io/github/omichelsen/compare-versions?branch=master)
 
-Compare [semver](http://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as node.js/iojs.
+Compare [semver](http://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as Node.js/React Native etc. Has no dependencies and is tiny (<600 bytes gzipped).
 
 This library supports the full semver specification, including comparing versions with different number of digits like `1.0.0`, `1.0`, `1`, and pre-release versions like `1.0.0-alpha`. Also supports wildcards for minor and patch version like `1.0.x` or `1.0.*`. Any leading `v` is ignored.
 
@@ -33,9 +33,9 @@ Can also be used for sorting:
 
 ```javascript
 var versions = [
-    '1.5.19'
+    '1.5.19',
     '1.2.3',
-    '1.5.5',
+    '1.5.5'
 ];
 console.log(versions.sort(compareVersions));
 ```
