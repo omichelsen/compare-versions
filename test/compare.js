@@ -70,6 +70,19 @@ describe('compare versions', function () {
         assert.equal(compare('v1.0.0-alpha', '1.0.0-alpha'), 0);
     });
 
+    it('should ignore leading `0`', function () {
+        [
+            ['01.0.0', '1.0.0', 0],
+            ['1.01.0', '1.01.0', 0],
+            ['1.0.03', '1.0.3', 0],
+            ['1.0.03-alpha', '1.0.3-alpha', 0],
+            ['v01.0.0', '1.0.0', 0],
+            ['v01.0.0', '2.0.0', -1],
+        ].forEach(function (data) {
+            assert.equal(compare(data[0], data[1]), data[2]);
+        });
+    });
+
     it('should throw on invalid input', function () {
         [
             [42, /Invalid argument expected string/],

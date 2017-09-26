@@ -1,7 +1,10 @@
-# Change Log
+# Changelog
 
-## [3.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.0.0) - 2017-04-01
-- Fix for leading 'v'
+## [3.1.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.1.0) - 2017-09-25
+- Ignore leading zero in numbers.
+
+## [3.0.1](https://github.com/omichelsen/compare-versions/releases/tag/v3.0.1) - 2017-04-01
+- Fix for leading 'v'.
 
 ## [3.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.0.0) - 2016-08-08
 - Validate input data.
