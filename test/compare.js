@@ -25,6 +25,26 @@ describe('compare versions', function () {
     assert.equal(compare('9', '10'), -1);
   });
 
+  describe('four-segment versions', () => {
+    [
+      ['1.0.0.0', '1', 0],
+      ['1.0.0.0', '1.0', 0],
+      ['1.0.0.0', '1.0.0', 0],
+      ['1.0.0.0', '1.0.0.0', 0],
+      ['1.2.3.4', '1.2.3.4', 0],
+      ['1.2.3.4', '1.2.3.04', 0],
+      ['v1.2.3.4', '01.2.3.4', 0],
+      ['1.2.3.4', '1.2.3.5', -1],
+      ['1.2.3.5', '1.2.3.4', 1],
+      ['1.0.0.0-alpha', '1.0.0-alpha', 0],
+      ['1.0.0.0-alpha', '1.0.0.0-beta', -1],
+    ].forEach(([v1, v2, expected]) => {
+      it(`${v1} ${cmp[expected]} ${v2}`, () => {
+        assert.equal(compare(v1, v2), expected);
+      });
+    });
+  });
+
   it('should compare versions with different number of digits in same group', function () {
     assert.equal(compare('11.0.10', '11.0.2'), 1);
     assert.equal(compare('11.0.2', '11.0.10'), -1);
@@ -51,9 +71,9 @@ describe('compare versions', function () {
       ['1.0.0-beta.11', '1.0.0-rc.1', -1],
       ['1.0.0-rc.1', '1.0.0', -1],
       ['1.0.0-alpha', '1', -1]
-    ].forEach(function (data) {
-      it('should return ' + data[0] + ' ' + cmp[data[2]] + ' ' + data[1], function () {
-        assert.equal(compare(data[0], data[1]), data[2]);
+    ].forEach(([v1, v2, expected]) => {
+      it(`${v1} ${cmp[expected]} ${v2}`, () => {
+        assert.equal(compare(v1, v2), expected);
       });
     });
   });
@@ -70,30 +90,35 @@ describe('compare versions', function () {
     assert.equal(compare('v1.0.0-alpha', '1.0.0-alpha'), 0);
   });
 
-  it('should ignore leading `0`', function () {
+  describe('ignore leading `0`', () => {
     [
+      ['01.0.0', '1', 0],
       ['01.0.0', '1.0.0', 0],
       ['1.01.0', '1.01.0', 0],
       ['1.0.03', '1.0.3', 0],
       ['1.0.03-alpha', '1.0.3-alpha', 0],
       ['v01.0.0', '1.0.0', 0],
       ['v01.0.0', '2.0.0', -1],
-    ].forEach(function (data) {
-      assert.equal(compare(data[0], data[1]), data[2]);
+    ].forEach(([v1, v2, expected]) => {
+      it(`${v1} ${cmp[expected]} ${v2}`, () => {
+        assert.equal(compare(v1, v2), expected);
+      });
     });
   });
 
-  it('should throw on invalid input', function () {
+  describe('invalid input', function () {
     [
       [42, /Invalid argument expected string/],
       [{}, /Invalid argument expected string/],
       [[], /Invalid argument expected string/],
       [function () {}, /Invalid argument expected string/],
       ['6.3.', /Invalid argument not valid semver/],
-    ].forEach(function (data) {
-      assert.throws(function () {
-        compare(data[0], data[0]);
-      }, data[1]);
+      ['1.2.3a', /Invalid argument not valid semver/],
+      ['1.2.-3a', /Invalid argument not valid semver/],
+    ].forEach(([v1, exception]) => {
+      it(`should throw on ${v1}`, () => {
+        assert.throws(() => { compare(v1, v1); }, exception);
+      });
     });
   });
 });

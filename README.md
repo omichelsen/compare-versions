@@ -8,6 +8,7 @@ Compare [semver](https://semver.org/) version strings to find greater, equal or 
 This library supports the full semver specification, including comparing versions with different number of digits like `1.0.0`, `1.0`, `1`, and pre-release versions like `1.0.0-alpha`. Additionally supports the following variations:
 
 - Supports wildcards for minor and patch version like `1.0.x` or `1.0.*`.
+- Supports [Chromium version numbers](https://www.chromium.org/developers/version-numbers) with 4 parts, e.g. version `25.0.1364.126`.
 - Any leading `v` is ignored, e.g. `v1.0` is interpreted as `1.0`.
 - Leading zero is ignored, e.g. `1.01.1` is interpreted as `1.1.1`.
 
