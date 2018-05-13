@@ -27,7 +27,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "mocha": "^4.0.1",
-    "nyc": "^11.3.0"
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.3"
   }
 }
