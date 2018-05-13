@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.2.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.2.0) - 2018-05-13
+- Support Chromium version numbers.
+
 ## [3.1.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.1.0) - 2017-09-25
 - Ignore leading zero in numbers.
 
