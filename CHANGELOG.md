@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.2.1](https://github.com/omichelsen/compare-versions/releases/tag/v3.2.1) - 2018-05-14
+- Fix rare bug in handling optional metadata.
+
 ## [3.2.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.2.0) - 2018-05-13
 - Support Chromium version numbers.
 
