@@ -17,9 +17,10 @@
   }
 
   function split(v) {
-    var patchIndex = indexOrEnd(v, '-');
-    var arr = v.replace(/^v/, '').substring(0, patchIndex).split('.');
-    arr.push(v.substring(patchIndex + 1));
+    var c = v.replace(/^v/, '').replace(/\+.*$/, '');
+    var patchIndex = indexOrEnd(c, '-');
+    var arr = c.substring(0, patchIndex).split('.');
+    arr.push(c.substring(patchIndex + 1));
     return arr;
   }
 
@@ -54,8 +55,8 @@
     var sp2 = s2[s2.length - 1];
 
     if (sp1 && sp2) {
-      var p1 = sp1.substring(0, indexOrEnd(sp1, '+')).split('.').map(tryParse);
-      var p2 = sp2.substring(0, indexOrEnd(sp2, '+')).split('.').map(tryParse);
+      var p1 = sp1.split('.').map(tryParse);
+      var p2 = sp2.split('.').map(tryParse);
 
       for (i = 0; i < Math.max(p1.length, p2.length); i++) {
         if (p1[i] === undefined || typeof p2[i] === 'string' && typeof p1[i] === 'number') return -1;
