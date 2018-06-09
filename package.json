@@ -19,6 +19,7 @@
     "browser",
     "node"
   ],
+  "typings": "index.d.ts",
   "scripts": {
     "test": "nyc mocha"
   },
