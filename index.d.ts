@@ -1,2 +1,2 @@
 declare function compareVersions(firstVersion: string, secondVersion: string): number;
-export = compareVersions;
+export default compareVersions;

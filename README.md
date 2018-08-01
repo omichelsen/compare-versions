@@ -20,12 +20,19 @@ $ npm install compare-versions
 
 ## Usage
 
+Javascript import
 ```javascript
 var compareVersions = require('compare-versions');
 
 compareVersions('10.1.8', '10.0.4'); //  1
 compareVersions('10.0.1', '10.0.1'); //  0
 compareVersions('10.1.1', '10.2.2'); // -1
+```
+
+TypeScript import
+
+```javascript
+import compareVersions from 'compare-versions';
 ```
 
 Can also be used for sorting:
