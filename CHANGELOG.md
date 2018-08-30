@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.4.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.4.0) - 2018-08-30
+- Show rejected version in error message.
+
 ## [3.3.1](https://github.com/omichelsen/compare-versions/releases/tag/v3.3.1) - 2018-08-18
 - Fix TypeScript export declaration.
 
