@@ -25,7 +25,7 @@ $ npm install compare-versions
 
 ```javascript
 // ES6/TypeScript
-import * as compareVersions from 'compare-versions';
+import compareVersions from 'compare-versions';
 
 // Node
 var compareVersions = require('compare-versions');
@@ -53,6 +53,14 @@ var sorted = versions.sort(compareVersions);
   '1.2.3',
   '1.5.5',
   '1.5.19'
+]
+*/
+var sortDescending = versions.sort(compareVersions).reverse();
+/*
+[
+  '1.5.19'
+  '1.5.5',
+  '1.2.3',
 ]
 */
 ```
