@@ -65,6 +65,19 @@ var sortDescending = versions.sort(compareVersions).reverse();
 */
 ```
 
+### "Human Readable" Compare
+
+The normal compare function doesn't return a self-explanatory value (using `1`, `0` and `-1`).
+This version returns the boolean which fulfills the specified operator.
+
+```js
+compareVersions.compare('10.1.8', '10.0.4', '>'); // return true
+compareVersions.compare('10.0.1', '10.0.1', '='); // return true
+compareVersions.compare('10.1.1', '10.2.2', '<'); // return true
+compareVersions.compare('10.1.1', '10.2.2', '<='); // return true
+compareVersions.compare('10.1.1', '10.2.2', '>='); // return false
+```
+
 ### Browser
 
 If included directly in the browser, `compareVersions()` is available on the global window:
