@@ -179,3 +179,53 @@ describe('compare versions', () => {
     ['v3.2.1', 'v2.3.2', 1],
   ]);
 });
+
+describe('human readable compare versions', () => {
+  it('should throw if the operator is not a string', () => {
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', null); }, /Invalid operator type, expected string but got /);
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', undefined); }, /Invalid operator type, expected string but got /);
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', true); }, /Invalid operator type, expected string but got boolean/);
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', 1); }, /Invalid operator type, expected string but got number/);
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', { foo:'bar' }); }, /Invalid operator type, expected string but got object/);
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', () => {}); }, /Invalid operator type, expected string but got function/);
+  });
+
+  it('should throw if the operator is not in the allowed operators', () => {
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', ''); }, /Invalid operator, expected one of /);
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', 'foo'); }, /Invalid operator, expected one of /);
+    assert.throws(() => { compare.compare('3.2.1', '3.2.0', '> '); }, /Invalid operator, expected one of /);
+  });
+
+  it('should throw the same Errors thrown by the main function', () => {
+    [
+      [42, /Invalid argument expected string/],
+      [{}, /Invalid argument expected string/],
+      [[], /Invalid argument expected string/],
+      [() => undefined, /Invalid argument expected string/],
+      ['6.3.', /Invalid argument not valid semver/],
+      ['1.2.3a', /Invalid argument not valid semver/],
+      ['1.2.-3a', /Invalid argument not valid semver/],
+    ].forEach(([v1, exception]) => {
+      assert.throws(() => { compare.compare(v1, v1, '>'); }, exception);
+    });
+  });
+
+  it('should return the expected results when everything is ok', () => {
+    [
+      {first: '10.1.8', second: '10.0.4', operator: '>', expected: true},
+      {first: '10.1.8', second: '10.0.4', operator: '>=', expected: true},
+      {first: '10.0.1', second: '10.0.1', operator: '=', expected: true},
+      {first: '10.0.1', second: '10.1.*', operator: '=', expected: false},
+      {first: '10.1.1', second: '10.2.2', operator: '<', expected: true},
+      {first: '10.1.1', second: '10.0.2', operator: '<', expected: false},
+      {first: '10.1.1', second: '10.2.2', operator: '<=', expected: true},
+      {first: '10.1.1', second: '10.1.1', operator: '<=', expected: true},
+      {first: '10.1.1', second: '10.0.2', operator: '<=', expected: false},
+      {first: '10.1.1', second: '10.0.2', operator: '>=', expected: true},
+      {first: '10.1.1', second: '10.1.1', operator: '>=', expected: true},
+      {first: '10.1.1', second: '10.2.2', operator: '>=', expected: false},
+    ].forEach(testCtx => {
+      assert.strictEqual(compare.compare(testCtx.first, testCtx.second, testCtx.operator), testCtx.expected);
+    })
+  });
+});
