@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.5.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.5.0) - 2019-06-22
+- Add api returning true or false given a comparison operator.
+
 ## [3.4.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.4.0) - 2018-08-30
 - Show rejected version in error message.
 
