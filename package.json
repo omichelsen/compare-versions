@@ -28,7 +28,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.0",
     "nyc": "^14.1.1"
   }
 }
