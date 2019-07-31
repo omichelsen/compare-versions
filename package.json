@@ -24,9 +24,9 @@
   },
   "main": "index.js",
   "types": "index.d.ts",
-  "directories": {
-    "test": "test"
-  },
+  "files": [
+    "index.d.ts"
+  ],
   "devDependencies": {
     "mocha": "^6.2.0",
     "nyc": "^14.1.1"
