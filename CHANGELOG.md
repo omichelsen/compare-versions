@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.5.1](https://github.com/omichelsen/compare-versions/releases/tag/v3.5.1) - 2019-07-31
+- Refactor map compare with less code.
+
 ## [3.5.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.5.0) - 2019-06-22
 - Add api returning true or false given a comparison operator.
 
