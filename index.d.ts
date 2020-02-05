@@ -37,6 +37,23 @@ declare const compareVersions: {
     secondVersion: string, 
     operator: compareVersions.CompareOperator
   ): boolean;
+
+  /**
+   * Validate [semver](https://semver.org/) version strings.
+   * 
+   * @param version Version number to validate
+   * @returns `true` if the version number is a valid semver version number, `false` otherwise.
+   *
+   * @example
+   * ```
+   * compareVersions.validate('1.0.0-rc.1'); // return true
+   * compareVersions.validate('1.0-rc.1'); // return false
+   * compareVersions.validate('foo'); // return false
+   * ```
+   */
+	validate(
+    version: string
+  ): boolean;
 };
 
 export = compareVersions;

@@ -83,9 +83,9 @@ compareVersions.compare('10.1.1', '10.2.2', '>='); // return false
 Applies the same ruleset as used before comparing version numbers and returns a boolean:
 
 ```javascript
-compareVersions.validate('1.0.0-rc.1'); //  true
-compareVersions.validate('1.0-rc.1'); //  false
-compareVersions.validate(1.0); //  false
+compareVersions.validate('1.0.0-rc.1'); // return true
+compareVersions.validate('1.0-rc.1'); // return false
+compareVersions.validate('foo'); // return false
 ```
 
 ### Browser
