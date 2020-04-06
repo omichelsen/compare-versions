@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.6.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.6.0) - 2020-02-13
+- Add `validate()` function for checking whether a version number is semver-compliant.
+
 ## [3.5.1](https://github.com/omichelsen/compare-versions/releases/tag/v3.5.1) - 2019-07-31
 - Refactor map compare with less code.
 
