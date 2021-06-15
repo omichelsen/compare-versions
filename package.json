@@ -28,7 +28,7 @@
     "index.d.ts"
   ],
   "devDependencies": {
-    "mocha": "^8.1.1",
+    "mocha": "^9.0.0",
     "nyc": "^15.1.0"
   }
 }
