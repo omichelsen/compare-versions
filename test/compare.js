@@ -1,18 +1,20 @@
-const assert = require('assert');
-const compare = require('..');
-const cmp = {
-  '1':  '>',
-  '0':  '=',
-  '-1': '<',
-};
-
-const runTests = (dataSet) => {
-  dataSet.forEach(([v1, v2, expected]) => {
-    it(`${v1} ${cmp[expected]} ${v2}`, () => assert.equal(compare(v1, v2), expected));
-  });
-};
+import assert from 'assert';
+import compareVersions, { compare } from '../index.mjs';
 
 describe('compare versions', () => {
+  const cmp = {
+    1: '>',
+    0: '=',
+    '-1': '<',
+  };
+
+  const runTests = (dataSet) => {
+    dataSet.forEach(([v1, v2, expected]) => {
+      it(`${v1} ${cmp[expected]} ${v2}`, () =>
+        assert.strictEqual(compareVersions(v1, v2), expected));
+    });
+  };
+
   describe('single-segment versions', () => {
     runTests([
       ['10', '9', 1],
@@ -34,6 +36,8 @@ describe('compare versions', () => {
       ['10.1.8', '10.0.4', 1],
       ['10.0.1', '10.0.1', 0],
       ['10.1.1', '10.2.2', -1],
+      ['11.0.10', '11.0.2', 1],
+      ['11.0.2', '11.0.10', -1],
     ]);
   });
 
@@ -53,19 +57,15 @@ describe('compare versions', () => {
     ]);
   });
 
-  it('should compare versions with different number of digits in same group', () => {
-    assert.equal(compare('11.0.10', '11.0.2'), 1);
-    assert.equal(compare('11.0.2', '11.0.10'), -1);
-  });
-
-  it('should compare versions with different number of digits in different groups', () => {
-    assert.equal(compare('11.1.10', '11.0'), 1);
-  });
-
-  it('should compare versions with different number of digits', () => {
-    assert.equal(compare('1.1.1', '1'), 1);
-    assert.equal(compare('1.0.0', '1'), 0);
-    assert.equal(compare('1.0', '1.4.1'), -1);
+  describe('different segment versions', () => {
+    runTests([
+      ['11.1.10', '11.0', 1],
+      ['1.1.1', '1', 1],
+      ['01.1.0', '1.01', 0],
+      ['1.0.0', '1', 0],
+      ['10.0.0', '10.114', -1],
+      ['1.0', '1.4.1', -1],
+    ]);
   });
 
   describe('pre-release versions - https://semver.org/#spec-item-9', () => {
@@ -79,6 +79,9 @@ describe('compare versions', () => {
       ['1.0.0-beta.11', '1.0.0-rc.1', -1],
       ['1.0.0-rc.1', '1.0.0', -1],
       ['1.0.0-alpha', '1', -1],
+      ['1.0.0-beta.11', '1.0.0-beta.1', 1],
+      ['1.0.0-beta.10', '1.0.0-beta.9', 1],
+      ['1.0.0-beta.10', '1.0.0-beta.90', -1],
     ]);
   });
 
@@ -128,7 +131,9 @@ describe('compare versions', () => {
       ['1.2.-3a', /Invalid argument not valid semver/],
     ].forEach(([v1, exception]) => {
       it(`should throw on ${v1}`, () => {
-        assert.throws(() => { compare(v1, v1); }, exception);
+        assert.throws(() => {
+          compareVersions(v1, v1);
+        }, exception);
       });
     });
   });
@@ -181,20 +186,59 @@ describe('compare versions', () => {
 });
 
 describe('human readable compare versions', () => {
-  it('should throw if the operator is not a string', () => {
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', null); }, /Invalid operator type, expected string but got /);
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', undefined); }, /Invalid operator type, expected string but got /);
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', true); }, /Invalid operator type, expected string but got boolean/);
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', 1); }, /Invalid operator type, expected string but got number/);
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', { foo:'bar' }); }, /Invalid operator type, expected string but got object/);
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', () => {}); }, /Invalid operator type, expected string but got function/);
-  });
+  const runTests = (dataSet) => {
+    dataSet.forEach(([v1, v2, operator, expected]) => {
+      it(`${v1} ${operator} ${v2}`, () =>
+        assert.strictEqual(compare(v1, v2, operator), expected));
+    });
+  };
 
-  it('should throw if the operator is not in the allowed operators', () => {
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', ''); }, /Invalid operator, expected one of /);
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', 'foo'); }, /Invalid operator, expected one of /);
-    assert.throws(() => { compare.compare('3.2.1', '3.2.0', '> '); }, /Invalid operator, expected one of /);
-  });
+  const runThrows = (dataSet) => {
+    dataSet.forEach(([v1, v2, operator, expected]) => {
+      it(`${v1} ${operator} ${v2}`, () => {
+        assert.throws(() => {
+          compare(v1, v2, operator);
+        }, expected);
+      });
+    });
+  };
+
+  runThrows([
+    ['3.2.1', '3.2.0', null, /Invalid operator type, expected string but got /],
+    [
+      '3.2.1',
+      '3.2.0',
+      undefined,
+      /Invalid operator type, expected string but got /,
+    ],
+    [
+      '3.2.1',
+      '3.2.0',
+      true,
+      /Invalid operator type, expected string but got boolean/,
+    ],
+    [
+      '3.2.1',
+      '3.2.0',
+      1,
+      /Invalid operator type, expected string but got number/,
+    ],
+    [
+      '3.2.1',
+      '3.2.0',
+      { foo: 'bar' },
+      /Invalid operator type, expected string but got object/,
+    ],
+    [
+      '3.2.1',
+      '3.2.0',
+      () => {},
+      /Invalid operator type, expected string but got function/,
+    ],
+    ['3.2.1', '3.2.0', '', /Invalid operator, expected one of /],
+    ['3.2.1', '3.2.0', 'foo', /Invalid operator, expected one of /],
+    ['3.2.1', '3.2.0', '> ', /Invalid operator, expected one of /],
+  ]);
 
   it('should throw the same Errors thrown by the main function', () => {
     [
@@ -206,26 +250,24 @@ describe('human readable compare versions', () => {
       ['1.2.3a', /Invalid argument not valid semver/],
       ['1.2.-3a', /Invalid argument not valid semver/],
     ].forEach(([v1, exception]) => {
-      assert.throws(() => { compare.compare(v1, v1, '>'); }, exception);
+      assert.throws(() => {
+        compare(v1, v1, '>');
+      }, exception);
     });
   });
 
-  it('should return the expected results when everything is ok', () => {
-    [
-      {first: '10.1.8', second: '10.0.4', operator: '>', expected: true},
-      {first: '10.1.8', second: '10.0.4', operator: '>=', expected: true},
-      {first: '10.0.1', second: '10.0.1', operator: '=', expected: true},
-      {first: '10.0.1', second: '10.1.*', operator: '=', expected: false},
-      {first: '10.1.1', second: '10.2.2', operator: '<', expected: true},
-      {first: '10.1.1', second: '10.0.2', operator: '<', expected: false},
-      {first: '10.1.1', second: '10.2.2', operator: '<=', expected: true},
-      {first: '10.1.1', second: '10.1.1', operator: '<=', expected: true},
-      {first: '10.1.1', second: '10.0.2', operator: '<=', expected: false},
-      {first: '10.1.1', second: '10.0.2', operator: '>=', expected: true},
-      {first: '10.1.1', second: '10.1.1', operator: '>=', expected: true},
-      {first: '10.1.1', second: '10.2.2', operator: '>=', expected: false},
-    ].forEach(testCtx => {
-      assert.strictEqual(compare.compare(testCtx.first, testCtx.second, testCtx.operator), testCtx.expected);
-    })
-  });
+  runTests([
+    ['10.1.8', '10.0.4', '>', true],
+    ['10.1.8', '10.0.4', '>=', true],
+    ['10.0.1', '10.0.1', '=', true],
+    ['10.0.1', '10.1.*', '=', false],
+    ['10.1.1', '10.2.2', '<', true],
+    ['10.1.1', '10.0.2', '<', false],
+    ['10.1.1', '10.2.2', '<=', true],
+    ['10.1.1', '10.1.1', '<=', true],
+    ['10.1.1', '10.0.2', '<=', false],
+    ['10.1.1', '10.0.2', '>=', true],
+    ['10.1.1', '10.1.1', '>=', true],
+    ['10.1.1', '10.2.2', '>=', false],
+  ]);
 });

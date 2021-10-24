@@ -4,4 +4,4 @@ arch:
 language: node_js
 node_js:
   - "node"
-after_script: "npm install coveralls && nyc report --reporter=text-lcov | coveralls"
+after_script: "npm install coveralls && c8 report --reporter=text-lcov | coveralls"

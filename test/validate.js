@@ -1,5 +1,5 @@
-const assert = require('assert');
-const compare = require('..');
+import assert from 'assert';
+import { validate } from '../index.mjs';
 
 describe('validate versions', () => {
   [
@@ -20,10 +20,10 @@ describe('validate versions', () => {
     ['1.0.0-build.3928', true],
     ['1.0.0+20130313144700', true],
     ['1.2.3.100', true],
-    ['2020', true]
+    ['2020', true],
   ].forEach(([v, expected]) => {
     it(`${v}`, () => {
-      assert.equal(compare.validate(v), expected)
+      assert.equal(validate(v), expected);
     });
   });
 });
