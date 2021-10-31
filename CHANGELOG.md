@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v4.0.0) - 2021-10-30
+- Add new ESM version in addition to the original CJS version.
+- Refactor ESM version to improve performance and reduce lines of code.
+- No breaking API changes but releasing as a major version bump to signal the new ESM code will be used by compatible bundlers like webpack and parcel.
+
 ## [3.6.0](https://github.com/omichelsen/compare-versions/releases/tag/v3.6.0) - 2020-02-13
 - Add `validate()` function for checking whether a version number is semver-compliant.
 
