@@ -1,7 +1,0 @@
-arch:
- - amd64
- - ppc64le
-language: node_js
-node_js:
-  - "node"
-after_script: "npm install coveralls && c8 report --reporter=text-lcov | coveralls"

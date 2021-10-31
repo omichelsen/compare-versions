@@ -20,7 +20,7 @@
     "node"
   ],
   "scripts": {
-    "test": "c8 mocha"
+    "test": "c8 --reporter=lcov mocha"
   },
   "main": "index.js",
   "module": "index.mjs",
