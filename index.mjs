@@ -1,7 +1,7 @@
 export default function compareVersions(v1, v2) {
   // validate input and split into segments
-  const n1 = validateAndParseVersion(v1);
-  const n2 = validateAndParseVersion(v2);
+  const n1 = validateAndParse(v1);
+  const n2 = validateAndParse(v2);
 
   // pop off the patch
   const p1 = n1.pop();
@@ -21,8 +21,7 @@ export default function compareVersions(v1, v2) {
   return 0;
 }
 
-export const validate = (version) =>
-  typeof version === 'string' && semver.test(version);
+export const validate = (v) => typeof v === 'string' && semver.test(v);
 
 export const compare = (v1, v2, operator) => {
   // validate input operator
@@ -35,10 +34,28 @@ export const compare = (v1, v2, operator) => {
   return operatorResMap[operator].includes(res);
 };
 
-const semver =
-  /^v?(\d+)(?:\.([x*]|\d+)(?:\.([x*]|\d+)(?:\.([x*]|\d+))?(?:-([\da-z\-]+(?:\.[\da-z\-]+)*))?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?)?)?$/i;
+export const satisfies = (v, r) => {
+  // if no range operator then "="
+  const op = r.match(/^([<>=~^]+)/)?.[1] || '=';
 
-const validateAndParseVersion = (v) => {
+  // if gt/lt/eq then operator compare
+  if (op !== '^' && op !== '~') return compare(v, r, op);
+
+  // else range of either "~" or "^" is assumed
+  const [v1, v2, v3] = validateAndParse(v);
+  const [m1, m2, m3] = validateAndParse(r);
+  if (compareStrings(v1, m1) !== 0) return false;
+  if (op === '^') {
+    return compareSegments([v2, v3], [m2, m3]) >= 0;
+  }
+  if (compareStrings(v2, m2) !== 0) return false;
+  return compareStrings(v3, m3) >= 0;
+};
+
+const semver =
+  /^[v^~<>=]*?(\d+)(?:\.([x*]|\d+)(?:\.([x*]|\d+)(?:\.([x*]|\d+))?(?:-([\da-z\-]+(?:\.[\da-z\-]+)*))?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?)?)?$/i;
+
+const validateAndParse = (v) => {
   if (typeof v !== 'string') {
     throw new TypeError('Invalid argument expected string');
   }
