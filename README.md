@@ -49,14 +49,6 @@ const sorted = versions.sort(compareVersions);
   '1.5.19'
 ]
 */
-const sortDescending = versions.sort(compareVersions).reverse();
-/*
-[
-  '1.5.19'
-  '1.5.5',
-  '1.2.3',
-]
-*/
 ```
 
 ### "Human Readable" Compare
@@ -71,6 +63,24 @@ compare('10.0.1', '10.0.1', '=');  // true
 compare('10.1.1', '10.2.2', '<');  // true
 compare('10.1.1', '10.2.2', '<='); // true
 compare('10.1.1', '10.2.2', '>='); // false
+```
+
+### Version ranges
+
+The `satisfies` function accepts a range to compare, compatible with [npm package versioning](https://docs.npmjs.com/cli/v6/using-npm/semver):
+
+```js
+import { satisfies } from 'compare-versions';
+
+satisfies('10.0.1', '~10.0.0');  // true
+satisfies('10.1.0', '~10.0.0');  // false
+satisfies('10.1.2', '^10.0.0');  // true
+satisfies('11.0.0', '^10.0.0');  // false
+satisfies('10.1.8', '>10.0.4');  // true
+satisfies('10.0.1', '=10.0.1');  // true
+satisfies('10.1.1', '<10.2.2');  // true
+satisfies('10.1.1', '<=10.2.2'); // true
+satisfies('10.1.1', '>=10.2.2'); // false
 ```
 
 ### Validate version numbers

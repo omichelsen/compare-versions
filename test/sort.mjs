@@ -3,7 +3,7 @@ import compareVersions from '../index.mjs';
 
 describe('sort versions', function () {
   it('should sort versions', function () {
-    var versions = [
+    const versions = [
       '1.2.3',
       '4.11.6',
       '4.2.0',
@@ -29,13 +29,13 @@ describe('sort versions', function () {
   });
 
   it('should sort different digits', function () {
-    var versions = ['1.0', '1.0.0', '1.0.1'];
+    const versions = ['1.0', '1.0.0', '1.0.1'];
 
     assert.deepEqual(versions.sort(compareVersions), ['1.0', '1.0.0', '1.0.1']);
   });
 
   it('should sort pre-release', function () {
-    var versions = ['1.0.0', '1.0.1', '1.0.1-gamma', '1.0.1-alpha'];
+    const versions = ['1.0.0', '1.0.1', '1.0.1-gamma', '1.0.1-alpha'];
 
     assert.deepEqual(versions.sort(compareVersions), [
       '1.0.0',
