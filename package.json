@@ -1,6 +1,6 @@
 {
   "name": "compare-versions",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Compare semver version strings to find greater, equal or lesser.",
   "repository": {
     "type": "git",
