@@ -36,20 +36,21 @@ export const compare = (v1, v2, operator) => {
 
 export const satisfies = (v, r) => {
   // if no range operator then "="
-  const op = r.match(/^([<>=~^]+)/)?.[1] || '=';
+  const m = r.match(/^([<>=~^]+)/);
+  const op = m ? m[1] : '=';
 
   // if gt/lt/eq then operator compare
   if (op !== '^' && op !== '~') return compare(v, r, op);
 
   // else range of either "~" or "^" is assumed
   const [v1, v2, v3] = validateAndParse(v);
-  const [m1, m2, m3] = validateAndParse(r);
-  if (compareStrings(v1, m1) !== 0) return false;
+  const [r1, r2, r3] = validateAndParse(r);
+  if (compareStrings(v1, r1) !== 0) return false;
   if (op === '^') {
-    return compareSegments([v2, v3], [m2, m3]) >= 0;
+    return compareSegments([v2, v3], [r2, r3]) >= 0;
   }
-  if (compareStrings(v2, m2) !== 0) return false;
-  return compareStrings(v3, m3) >= 0;
+  if (compareStrings(v2, r2) !== 0) return false;
+  return compareStrings(v3, r3) >= 0;
 };
 
 const semver =
