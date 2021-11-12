@@ -1,5 +1,8 @@
 # Changelog
 
+## [4.0.2](https://github.com/omichelsen/compare-versions/releases/tag/v4.0.2) - 2021-11-12
+- Fix wildcard comparisons.
+
 ## [4.0.1](https://github.com/omichelsen/compare-versions/releases/tag/v4.0.1) - 2021-11-01
 - Remove `{ "type": "module" }` from package.json and set `{ "sideEffects": false }`.
 
