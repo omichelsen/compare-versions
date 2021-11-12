@@ -1,5 +1,8 @@
 # Changelog
 
+## [4.1.0](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.0) - 2021-11-12
+- Add `satisfies()` function to test for range match
+
 ## [4.0.2](https://github.com/omichelsen/compare-versions/releases/tag/v4.0.2) - 2021-11-12
 - Fix wildcard comparisons.
 
