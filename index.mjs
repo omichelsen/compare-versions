@@ -50,6 +50,8 @@ const validateAndParseVersion = (v) => {
   return match;
 };
 
+const isWildcard = (s) => s === '*' || s === 'x' || s === 'X';
+
 const tryParse = (v) => {
   const n = parseInt(v, 10);
   return isNaN(n) ? v : n;
@@ -59,6 +61,7 @@ const forceType = (a, b) =>
   typeof a !== typeof b ? [String(a), String(b)] : [a, b];
 
 const compareStrings = (a, b) => {
+  if (isWildcard(a) || isWildcard(b)) return 0;
   const [ap, bp] = forceType(tryParse(a), tryParse(b));
   if (ap > bp) return 1;
   if (ap < bp) return -1;
