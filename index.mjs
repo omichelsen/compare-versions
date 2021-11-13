@@ -104,6 +104,7 @@ const operatorResMap = {
 
 const allowedOperators = Object.keys(operatorResMap);
 
+// test
 const assertValidOperator = (op) => {
   if (typeof op !== 'string') {
     throw new TypeError(
