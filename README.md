@@ -25,7 +25,7 @@ Note: Starting from v4 this library includes a ESM version which will automatica
 
 Will return `1` if first version is greater, `0` if versions are equal, and `-1` if the second version is greater:
 
-```javascript
+```js
 import compareVersions from 'compare-versions';
 
 compareVersions('11.1.1', '10.0.0'); //  1
@@ -35,7 +35,7 @@ compareVersions('10.0.0', '11.1.1'); // -1
 
 Can also be used for sorting:
 
-```javascript
+```js
 const versions = [
   '1.5.19',
   '1.2.3',
@@ -87,7 +87,7 @@ satisfies('10.1.1', '>=10.2.2'); // false
 
 Applies the same ruleset used comparing version numbers and returns a boolean:
 
-```javascript
+```js
 import { validate } from 'compare-versions';
 
 validate('1.0.0-rc.1'); // true
@@ -100,10 +100,11 @@ validate('foo');        // false
 If included directly in the browser, `compareVersions()` is available on the global window:
 
 ```html
-<script src="compare-versions/index.js"></script>
+<script src=https://unpkg.com/compare-versions></script>
 <script>
   window.compareVersions('11.0.0', '10.0.0');
   window.compareVersions.compare('11.0.0', '10.0.0', '>');
   window.compareVersions.validate('11.0.0');
+  window.compareVersions.satisfies('1.2.0', '^1.0.0');
 </script>
 ```
