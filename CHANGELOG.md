@@ -1,5 +1,8 @@
 # Changelog
 
+## [4.1.2](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.2) - 2021-12-09
+- Do not allow leading comparators in `validate()`.
+
 ## [4.1.1](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.1) - 2021-11-12
 - Remove optional chaining operator.
 
