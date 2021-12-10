@@ -21,7 +21,8 @@ export default function compareVersions(v1, v2) {
   return 0;
 }
 
-export const validate = (v) => typeof v === 'string' && semver.test(v);
+export const validate = (v) =>
+  typeof v === 'string' && /^[v\d]/.test(v) && semver.test(v);
 
 export const compare = (v1, v2, operator) => {
   // validate input operator

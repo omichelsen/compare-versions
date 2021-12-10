@@ -9,6 +9,7 @@ describe('validate versions', () => {
     [{}, false],
     [[], false],
     [() => undefined, false],
+    ['foo', false],
     ['6.3.', false],
     ['1.2.3a', false],
     ['1.2.-3a', false],
@@ -21,6 +22,8 @@ describe('validate versions', () => {
     ['1.0.0+20130313144700', true],
     ['1.2.3.100', true],
     ['2020', true],
+    ['=1.0', false],
+    ['>1.0.0', false],
   ].forEach(([v, expected]) => {
     it(`${v}`, () => {
       assert.equal(validate(v), expected);
