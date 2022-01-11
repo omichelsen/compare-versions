@@ -1,5 +1,8 @@
 # Changelog
 
+## [4.1.3](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.3) - 2022-01-11
+- Export CJS style in ESM for cross compatibility.
+
 ## [4.1.2](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.2) - 2021-12-09
 - Do not allow leading comparators in `validate()`.
 
