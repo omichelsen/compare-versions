@@ -83,7 +83,7 @@
       var p1 = sp1.split('.').map(tryParse);
       var p2 = sp2.split('.').map(tryParse);
 
-      for (i = 0; i < Math.max(p1.length, p2.length); i++) {
+      for (var i = 0; i < Math.max(p1.length, p2.length); i++) {
         if (
           p1[i] === undefined ||
           (typeof p2[i] === 'string' && typeof p1[i] === 'number')
