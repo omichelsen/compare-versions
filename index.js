@@ -129,7 +129,7 @@
   }
 
   compareVersions.validate = function (version) {
-    return typeof version === 'string' && semver.test(version);
+    return typeof version === 'string' && /^[v\d]/.test(version) && semver.test(version);
   };
 
   compareVersions.compare = function (v1, v2, operator) {
