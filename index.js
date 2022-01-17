@@ -24,6 +24,10 @@
     return arr;
   }
 
+  function isWildcard(s) {
+    return s === '*' || s === 'x' || s === 'X';
+  }
+
   function tryParse(v) {
     var n = parseInt(v, 10);
     return isNaN(n) ? v : n;
@@ -48,6 +52,7 @@
   }
 
   function compareStrings(a, b) {
+    if (isWildcard(a) || isWildcard(b)) return 0;
     var [ap, bp] = forceType(tryParse(a), tryParse(b));
     if (ap > bp) return 1;
     if (ap < bp) return -1;
