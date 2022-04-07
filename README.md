@@ -19,14 +19,16 @@ Supports the full semver specification including versions with different number 
 $ npm install compare-versions
 ```
 
-Note: Starting from v4 this library includes a ESM version which will automatically be selected by your bundler (webpack, parcel etc). The old CJS version is `index.js` and the new ESM version is `index.mjs`.
+__Note__: Starting from v5 the main export is now _named_ like so: `import { compareVersions } from 'compare-versions'`.
+
+__Note__: Starting from v4 this library includes a ESM version which will automatically be selected by your bundler (webpack, parcel etc). The CJS/UMD version is `lib/umd/index.js` and the new ESM version is `lib/esm/index.js`.
 
 ## Usage
 
 Will return `1` if first version is greater, `0` if versions are equal, and `-1` if the second version is greater:
 
 ```js
-import compareVersions from 'compare-versions';
+import { compareVersions } from 'compare-versions';
 
 compareVersions('11.1.1', '10.0.0'); //  1
 compareVersions('10.0.0', '10.0.0'); //  0
@@ -85,7 +87,7 @@ satisfies('10.1.1', '>=10.2.2'); // false
 
 ### Validate version numbers
 
-Applies the same ruleset used comparing version numbers and returns a boolean:
+Applies the same rules used comparing version numbers and returns a boolean:
 
 ```js
 import { validate } from 'compare-versions';
@@ -97,14 +99,15 @@ validate('foo');        // false
 
 ### Browser
 
-If included directly in the browser, `compareVersions()` is available on the global window:
+If included directly in the browser, the functions above are available on the global window under the `compareVersions` object:
 
 ```html
-<script src=https://unpkg.com/compare-versions></script>
+<script src=https://unpkg.com/compare-versions/lib/umd/index.js></script>
 <script>
-  window.compareVersions('11.0.0', '10.0.0');
-  window.compareVersions.compare('11.0.0', '10.0.0', '>');
-  window.compareVersions.validate('11.0.0');
-  window.compareVersions.satisfies('1.2.0', '^1.0.0');
+  const { compareVersions, compare, satisfies, validate } = window.compareVersions
+  console.log(compareVersions('11.0.0', '10.0.0'))
+  console.log(compare('11.0.0', '10.0.0', '>'))
+  console.log(satisfies('1.2.0', '^1.0.0'))
+  console.log(validate('11.0.0'))
 </script>
 ```

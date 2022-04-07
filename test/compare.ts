@@ -1,14 +1,14 @@
 import assert from 'assert';
-import compareVersions, { compare } from '../index.mjs';
+import { compareVersions, compare, CompareOperator } from '../src/index';
 
 describe('compare versions', () => {
   const cmp = {
-    1: '>',
-    0: '=',
+    '1': '>',
+    '0': '=',
     '-1': '<',
-  };
+  } as { [key: string]: string };
 
-  const runTests = (dataSet) => {
+  const runTests = (dataSet: Array<[string, string, number]>) => {
     dataSet.forEach(([v1, v2, expected]) => {
       it(`${v1} ${cmp[expected]} ${v2}`, () =>
         assert.strictEqual(
@@ -152,18 +152,20 @@ describe('compare versions', () => {
   });
 
   describe('invalid input', () => {
-    [
-      [42, /Invalid argument expected string/],
-      [{}, /Invalid argument expected string/],
-      [[], /Invalid argument expected string/],
-      [() => undefined, /Invalid argument expected string/],
-      ['6.3.', /Invalid argument not valid semver/],
-      ['1.2.3a', /Invalid argument not valid semver/],
-      ['1.2.-3a', /Invalid argument not valid semver/],
-    ].forEach(([v1, exception]) => {
+    (
+      [
+        [42, /Invalid argument expected string/],
+        [{}, /Invalid argument expected string/],
+        [[], /Invalid argument expected string/],
+        [() => undefined, /Invalid argument expected string/],
+        ['6.3.', /Invalid argument not valid semver/],
+        ['1.2.3a', /Invalid argument not valid semver/],
+        ['1.2.-3a', /Invalid argument not valid semver/],
+      ] as const
+    ).forEach(([v1, exception]) => {
       it(`should throw on ${v1}`, () => {
         assert.throws(() => {
-          compareVersions(v1, v1);
+          compareVersions(v1 as any, v1 as any);
         }, exception);
       });
     });
@@ -204,7 +206,9 @@ describe('compare versions', () => {
 });
 
 describe('human readable compare versions', () => {
-  const runTests = (dataSet) => {
+  const runTests = (
+    dataSet: Array<[string, string, CompareOperator, boolean]>
+  ) => {
     dataSet.forEach(([v1, v2, operator, expected]) => {
       it(`${v1} ${operator} ${v2}`, () =>
         assert.strictEqual(
@@ -215,7 +219,7 @@ describe('human readable compare versions', () => {
     });
   };
 
-  const runThrows = (dataSet) => {
+  const runThrows = (dataSet: Array<[string, string, any, RegExp]>) => {
     dataSet.forEach(([v1, v2, operator, expected]) => {
       it(`${v1} ${operator} ${v2}`, () => {
         assert.throws(() => {
@@ -263,17 +267,19 @@ describe('human readable compare versions', () => {
   ]);
 
   it('should throw the same Errors thrown by the main function', () => {
-    [
-      [42, /Invalid argument expected string/],
-      [{}, /Invalid argument expected string/],
-      [[], /Invalid argument expected string/],
-      [() => undefined, /Invalid argument expected string/],
-      ['6.3.', /Invalid argument not valid semver/],
-      ['1.2.3a', /Invalid argument not valid semver/],
-      ['1.2.-3a', /Invalid argument not valid semver/],
-    ].forEach(([v1, exception]) => {
+    (
+      [
+        [42, /Invalid argument expected string/],
+        [{}, /Invalid argument expected string/],
+        [[], /Invalid argument expected string/],
+        [() => undefined, /Invalid argument expected string/],
+        ['6.3.', /Invalid argument not valid semver/],
+        ['1.2.3a', /Invalid argument not valid semver/],
+        ['1.2.-3a', /Invalid argument not valid semver/],
+      ] as const
+    ).forEach(([v1, exception]) => {
       assert.throws(() => {
-        compare(v1, v1, '>');
+        compare(v1 as any, v1 as any, '>');
       }, exception);
     });
   });

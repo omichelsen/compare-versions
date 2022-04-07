@@ -1,5 +1,5 @@
 import assert from 'assert';
-import compareVersions from '../index.mjs';
+import { compareVersions } from '../src/index';
 
 describe('sort versions', function () {
   it('should sort versions', function () {
