@@ -57,7 +57,7 @@ export const satisfies = (v, r) => {
 // export CJS style for parity
 compareVersions.validate = validate;
 compareVersions.compare = compare;
-compareVersions.sastisfies = satisfies;
+compareVersions.satisfies = satisfies;
 
 const semver =
   /^[v^~<>=]*?(\d+)(?:\.([x*]|\d+)(?:\.([x*]|\d+)(?:\.([x*]|\d+))?(?:-([\da-z\-]+(?:\.[\da-z\-]+)*))?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?)?)?$/i;
