@@ -148,7 +148,7 @@
     var op = match ? match[1] : '=';
 
     // if gt/lt/eq then operator compare
-    if (op !== '^' && op !== '~') return compareVersions.compare(v, r, op);
+    if (op !== '^' && op !== '~') return compareVersions.compare(v, r.replace(/^([<>=~^]+)/, ""), op);
 
     // else range of either "~" or "^" is assumed
     var [v1, v2, v3] = validateAndParse(v);
