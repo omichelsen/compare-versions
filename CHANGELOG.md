@@ -1,5 +1,8 @@
 # Changelog
 
+## [4.1.4](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.4) - 2022-08-23
+- Fix `satisfies()` CJS export.
+
 ## [4.1.3](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.3) - 2022-01-11
 - Export CJS style in ESM for cross compatibility.
 
