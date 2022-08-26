@@ -1,5 +1,8 @@
 # Changelog
 
+## [5.0.1](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.1) - 2022-08-26
+- Include source file in npm bundle for source maps.
+
 ## [5.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.0) - 2022-08-25
 - BREAKING CHANGE: main export is now named.
 - Rewrite in TypeScript. Ensure single source of truth for all outputs.
