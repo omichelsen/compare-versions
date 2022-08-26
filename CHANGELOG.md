@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.0) - 2022-08-25
+- BREAKING CHANGE: main export is now named.
+- Rewrite in TypeScript. Ensure single source of truth for all outputs.
+- Support ESM and CJS (through UMD).
+- Dropped Bower support.
+
 ## [4.1.4](https://github.com/omichelsen/compare-versions/releases/tag/v4.1.4) - 2022-08-23
 - Fix `satisfies()` CJS export.
 
