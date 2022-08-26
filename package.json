@@ -30,7 +30,8 @@
   "types": "./lib/esm/index.d.ts",
   "sideEffects": false,
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "devDependencies": {
     "@types/mocha": "^9.1.0",
