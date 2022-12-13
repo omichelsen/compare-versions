@@ -146,8 +146,8 @@ const compareStrings = (a: string, b: string) => {
 };
 
 const compareSegments = (
-  a: string | RegExpMatchArray,
-  b: string | RegExpMatchArray
+  a: string | string[] | RegExpMatchArray,
+  b: string | string[] | RegExpMatchArray
 ) => {
   for (let i = 0; i < Math.max(a.length, b.length); i++) {
     const r = compareStrings(a[i] || '0', b[i] || '0');
