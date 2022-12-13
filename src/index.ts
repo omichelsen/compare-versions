@@ -100,14 +100,31 @@ export const satisfies = (version: string, range: string) => {
     return compare(version, range, op as CompareOperator);
 
   // else range of either "~" or "^" is assumed
-  const [v1, v2, v3] = validateAndParse(version);
-  const [r1, r2, r3] = validateAndParse(range);
-  if (compareStrings(v1, r1) !== 0) return false;
-  if (op === '^') {
-    return compareSegments([v2, v3], [r2, r3]) >= 0;
+  const [v1, v2, v3, , vp] = validateAndParse(version);
+  const [r1, r2, r3, , rp] = validateAndParse(range);
+  const v = [v1, v2, v3];
+  const r = [r1, r2 ?? 'x', r3 ?? 'x'];
+
+  // validate pre-release
+  if (rp) {
+    if (!vp) return false;
+    if (compareSegments(v, r) !== 0) return false;
+    if (compareSegments(vp.split('.'), rp.split('.')) === -1) return false;
   }
-  if (compareStrings(v2, r2) !== 0) return false;
-  return compareStrings(v3, r3) >= 0;
+
+  // first non-zero number
+  const nonZero = r.findIndex((v) => v !== '0') + 1;
+
+  // pointer to where segments can be >=
+  const i = op === '~' ? 2 : nonZero > 1 ? nonZero : 1;
+
+  // before pointer must be equal
+  if (compareSegments(v.slice(0, i), r.slice(0, i)) !== 0) return false;
+
+  // after pointer must be >=
+  if (compareSegments(v.slice(i), r.slice(i)) === -1) return false;
+
+  return true;
 };
 
 const semver =
