@@ -1,5 +1,8 @@
 # Changelog
 
+## [5.0.3](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.3) - 2022-12-13
+- Fix npm build chache from 5.0.2.
+-
 ## [5.0.2](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.2) - 2022-12-13
 - Fix `satisfies()` handling of 0.x versions.
 
