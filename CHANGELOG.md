@@ -1,5 +1,8 @@
 # Changelog
 
+## [5.0.2](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.2) - 2022-12-13
+- Fix `satisfies()` handling of 0.x versions.
+
 ## [5.0.1](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.1) - 2022-08-26
 - Include source file in npm bundle for source maps.
 
