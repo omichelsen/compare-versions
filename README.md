@@ -12,6 +12,7 @@ Supports the full semver specification including versions with different number 
 - [Chromium version numbers](https://www.chromium.org/developers/version-numbers) with 4 parts, e.g. version `25.0.1364.126`.
 - Any leading `v` is ignored, e.g. `v1.0` is interpreted as `1.0`.
 - Leading zero is ignored, e.g. `1.01.1` is interpreted as `1.1.1`.
+- [npm version ranges](https://docs.npmjs.com/cli/v6/using-npm/semver#ranges), e.g. `1.2.7 || >=1.2.9 <2.0.0`
 
 ## Install
 
@@ -83,6 +84,8 @@ satisfies('10.0.1', '=10.0.1');  // true
 satisfies('10.1.1', '<10.2.2');  // true
 satisfies('10.1.1', '<=10.2.2'); // true
 satisfies('10.1.1', '>=10.2.2'); // false
+satisfies('1.4.6', '1.2.7 || >=1.2.9 <2.0.0'); // true
+satisfies('1.2.8', '1.2.7 || >=1.2.9 <2.0.0'); // false
 ```
 
 ### Validate version numbers
