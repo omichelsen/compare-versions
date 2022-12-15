@@ -1,8 +1,11 @@
 # Changelog
 
+## [6.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v6.0.0) - 2022-12-15
+- BREAKING CHANGE: `satisfies()` now supports npm comparator sets. This should not be a breaking change but it will assign meaning to spaces in the range which previously were ignored.
+
 ## [5.0.3](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.3) - 2022-12-13
 - Fix npm build chache from 5.0.2.
--
+
 ## [5.0.2](https://github.com/omichelsen/compare-versions/releases/tag/v5.0.2) - 2022-12-13
 - Fix `satisfies()` handling of 0.x versions.
 
