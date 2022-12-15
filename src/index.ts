@@ -90,7 +90,18 @@ export const compare = (v1: string, v2: string, operator: CompareOperator) => {
  * satisfies('1.1.0', '~1.0.0'); // return false
  * ```
  */
-export const satisfies = (version: string, range: string) => {
+export const satisfies = (version: string, range: string): boolean => {
+  // handle multiple comparators
+  if (range.includes('||')) {
+    return range.split('||').some((r) => satisfies(version, r));
+  } else if (range.includes(' ')) {
+    return range
+      .trim()
+      .replace(/\s{2,}/g, ' ')
+      .split(' ')
+      .every((r) => satisfies(version, r));
+  }
+
   // if no range operator then "="
   const m = range.match(/^([<>=~^]+)/);
   const op = m ? m[1] : '=';
