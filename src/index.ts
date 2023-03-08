@@ -47,7 +47,7 @@ export const validate = (version: string) =>
 /**
  * Allowed arithmetic operators
  */
-export type CompareOperator = '>' | '>=' | '=' | '<' | '<=';
+export type CompareOperator = '>' | '>=' | '=' | '<' | '<=' | '!=';
 
 /**
  * Compare [semver](https://semver.org/) version strings using the specified operator.
@@ -190,6 +190,7 @@ const operatorResMap = {
   '=': [0],
   '<=': [-1, 0],
   '<': [-1],
+  '!=': [-1, 1],
 };
 
 const allowedOperators = Object.keys(operatorResMap);
