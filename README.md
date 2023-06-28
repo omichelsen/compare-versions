@@ -86,6 +86,8 @@ satisfies('10.1.1', '<=10.2.2'); // true
 satisfies('10.1.1', '>=10.2.2'); // false
 satisfies('1.4.6', '1.2.7 || >=1.2.9 <2.0.0'); // true
 satisfies('1.2.8', '1.2.7 || >=1.2.9 <2.0.0'); // false
+satisfies('1.5.1', '1.2.3 - 2.3.4'); // true
+satisfies('2.3.5', '1.2.3 - 2.3.4'); // false
 ```
 
 ### Validate version numbers
