@@ -119,4 +119,16 @@ describe('satisfies versions', () => {
       ['2.4.0', '1.2.3 - 2.3.4', false],
     ]);
   });
+
+  describe('malformed input - https://docs.npmjs.com/cli/v6/using-npm/semver#hyphen-ranges-xyz---abc', () => {
+    runTests([
+      ['1.2.3', '> 1.2.3', false],
+      ['1.2.4', '> 1.2.3', true],
+      ['1.2.3', '> 1.2.3 < 1.2.5', false],
+      ['1.2.4', '> 1.2.3 < 1.2.5', true],
+      ['0.0.0', '> 1.2.3 <=  1.2.5   ||   0.0.0', true],
+      ['1.2.5', '> 1.2.3 <=  1.2.5   ||   0.0.0', true],
+      ['1.3.0', '> 1.2.3 <=  1.2.5   ||   0.0.0', false],
+    ]);
+  });
 });

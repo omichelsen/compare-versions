@@ -91,6 +91,9 @@ export const compare = (v1: string, v2: string, operator: CompareOperator) => {
  * ```
  */
 export const satisfies = (version: string, range: string): boolean => {
+  // clean input
+  range = range.replace(/([><=]+)\s+/g, '$1');
+
   // handle multiple comparators
   if (range.includes('||')) {
     return range.split('||').some((r) => satisfies(version, r));
