@@ -1,5 +1,8 @@
 # Changelog
 
+## [6.1.0](https://github.com/omichelsen/compare-versions/releases/tag/v6.1.0) - 2023-08-07
+- Add new function `validateStrict` to validate according to strict semver rules.
+
 ## [6.0.0](https://github.com/omichelsen/compare-versions/releases/tag/v6.0.0) - 2022-12-15
 - BREAKING CHANGE: `satisfies()` now supports npm comparator sets. This should not be a breaking change but it will assign meaning to spaces in the range which previously were ignored.
 
