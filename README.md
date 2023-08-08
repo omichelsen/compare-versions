@@ -102,6 +102,20 @@ validate('1.0-rc.1');   // false
 validate('foo');        // false
 ```
 
+### Validate version numbers (strict)
+
+Validate version numbers strictly according to semver.org; 3 integers, no wildcards, no leading zero or "v" etc:
+
+```js
+import { validateStrict } from 'compare-versions';
+
+validate('1.0.0');      // true
+validate('1.0.0-rc.1'); // true
+validate('1.0');        // false
+validate('1.x');        // false
+validate('v1.02');      // false
+```
+
 ### Browser
 
 If included directly in the browser, the functions above are available on the global window under the `compareVersions` object:
@@ -114,5 +128,6 @@ If included directly in the browser, the functions above are available on the gl
   console.log(compare('11.0.0', '10.0.0', '>'))
   console.log(satisfies('1.2.0', '^1.0.0'))
   console.log(validate('11.0.0'))
+  console.log(validateStrict('11.0.0'))
 </script>
 ```
