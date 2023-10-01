@@ -17,7 +17,7 @@ import { CompareOperator, compareSegments, validateAndParse } from './utils';
 export const satisfies = (version: string, range: string): boolean => {
   // clean input
   range = range.replace(/([><=]+)\s+/g, '$1');
-
+  
   // handle multiple comparators
   if (range.includes('||')) {
     return range.split('||').some((r) => satisfies(version, r));
@@ -37,7 +37,7 @@ export const satisfies = (version: string, range: string): boolean => {
   const op = m ? m[1] : '=';
 
   // if gt/lt/eq then operator compare
-  if (op !== '^' && op !== '~')
+  if (op !== '^' && op !== '~' && range.length > 1 && !range.includes('*'))
     return compare(version, range, op as CompareOperator);
 
   // else range of either "~" or "^" is assumed
