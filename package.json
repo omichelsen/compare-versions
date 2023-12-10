@@ -24,7 +24,7 @@
     "build:esm": "tsc --module esnext --target es2017 --outDir lib/esm",
     "build:umd": "rollup lib/esm/index.js --format umd --name compareVersions --sourcemap -o lib/umd/index.js",
     "prepublishOnly": "npm run build",
-    "test": "c8 --reporter=lcov mocha -r ts-node/register test/**/*.ts"
+    "test": "c8 --reporter=lcov mocha"
   },
   "main": "./lib/umd/index.js",
   "module": "./lib/esm/index.js",
