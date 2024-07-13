@@ -1,5 +1,8 @@
 # Changelog
 
+## [6.1.1](https://github.com/omichelsen/compare-versions/releases/tag/v6.1.1) - 2024-07-13
+- Fix ESM module browser support by appending `.js` extension to imports.
+
 ## [6.1.0](https://github.com/omichelsen/compare-versions/releases/tag/v6.1.0) - 2023-08-07
 - Add new function `validateStrict` to validate according to strict semver rules.
 
