@@ -1,10 +1,10 @@
 # compare-versions
 
-![Build Status](https://github.com/omichelsen/compare-versions/actions/workflows/ci.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/omichelsen/compare-versions/badge.svg?branch=master&service=github)](https://coveralls.io/github/omichelsen/compare-versions?branch=master)
-[![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/compare-versions.svg)](https://bundlephobia.com/result?p=compare-versions)
+[![Build Status](https://github.com/omichelsen/compare-versions/actions/workflows/ci.yml/badge.svg)](https://github.com/omichelsen/compare-versions/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/omichelsen/compare-versions/badge.svg?branch=main&service=github)](https://coveralls.io/github/omichelsen/compare-versions?branch=master)
+[![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/compare-versions.svg)](https://bundlephobia.com/package/compare-versions)
 
-Compare [semver](https://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as Node.js/React Native etc. Has no dependencies and is tiny.
+Compare [semver](https://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as Node.js/React Native etc. Has no dependencies and is [tiny](https://bundlephobia.com/package/compare-versions).
 
 Supports the full semver specification including versions with different number of digits like `1.0.0`, `1.0`, `1` and pre-releases like `1.0.0-alpha`. Additionally supports the following variations:
 
