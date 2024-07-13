@@ -1,7 +1,7 @@
 # compare-versions
 
 [![Build Status](https://github.com/omichelsen/compare-versions/actions/workflows/ci.yml/badge.svg)](https://github.com/omichelsen/compare-versions/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/omichelsen/compare-versions/badge.svg?branch=main&service=github)](https://coveralls.io/github/omichelsen/compare-versions?branch=master)
+[![Coverage Status](https://coveralls.io/repos/omichelsen/compare-versions/badge.svg?branch=main&service=github)](https://coveralls.io/github/omichelsen/compare-versions?branch=main)
 [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/compare-versions.svg)](https://bundlephobia.com/package/compare-versions)
 
 Compare [semver](https://semver.org/) version strings to find greater, equal or lesser. Runs in the browser as well as Node.js/React Native etc. Has no dependencies and is [tiny](https://bundlephobia.com/package/compare-versions).
