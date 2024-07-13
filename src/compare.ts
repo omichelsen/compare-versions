@@ -1,5 +1,5 @@
-import { compareVersions } from './compareVersions';
-import { CompareOperator } from './utils';
+import { compareVersions } from './compareVersions.js';
+import { CompareOperator } from './utils.js';
 
 /**
  * Compare [semver](https://semver.org/) version strings using the specified operator.

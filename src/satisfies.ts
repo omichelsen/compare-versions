@@ -1,5 +1,5 @@
-import { compare } from './compare';
-import { CompareOperator, compareSegments, validateAndParse } from './utils';
+import { compare } from './compare.js';
+import { CompareOperator, compareSegments, validateAndParse } from './utils.js';
 
 /**
  * Match [npm semver](https://docs.npmjs.com/cli/v6/using-npm/semver) version range.

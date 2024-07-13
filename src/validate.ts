@@ -1,4 +1,4 @@
-import { semver } from './utils';
+import { semver } from './utils.js';
 
 /**
  * Validate [semver](https://semver.org/) version strings.

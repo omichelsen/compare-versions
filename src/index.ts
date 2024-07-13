@@ -1,5 +1,5 @@
-export { compare } from './compare';
-export { compareVersions } from './compareVersions';
-export { satisfies } from './satisfies';
-export { CompareOperator } from './utils';
-export { validate, validateStrict } from './validate';
+export { compare } from './compare.js';
+export { compareVersions } from './compareVersions.js';
+export { satisfies } from './satisfies.js';
+export { CompareOperator } from './utils.js';
+export { validate, validateStrict } from './validate.js';

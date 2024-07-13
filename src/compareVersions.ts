@@ -1,4 +1,4 @@
-import { compareSegments, validateAndParse } from './utils';
+import { compareSegments, validateAndParse } from './utils.js';
 
 /**
  * Compare [semver](https://semver.org/) version strings to find greater, equal or lesser.
