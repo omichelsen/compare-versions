@@ -1,20 +1,18 @@
 {
-	"compilerOptions": {
-		"declaration": true,
-		"esModuleInterop": true,
-		"module": "UMD",
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"outDir": ".",
-		"sourceMap": true,
-		"strict": true,
-		"target": "ES5"
-	},
-	"include": [
-		"src/index.ts"
-	],
-	"exclude": [
-		"./src/test/**/*",
-		"node_modules"
-	]
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "module": "UMD",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": ".",
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES5"
+  },
+  "include": ["src/index.ts"],
+  "exclude": ["./src/test/**/*", "node_modules"],
+  "ts-node": {
+    "experimentalResolver": true
+  }
 }
