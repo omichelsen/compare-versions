@@ -118,12 +118,27 @@ validate('v1.02');      // false
 
 ### Browser
 
+In modern browsers the functions above can be imported as modules:
+
+```html
+<script type="module">
+  import { compareVersions, compare, satisfies, validate, validateStrict } from './node_modules/compare-versions/lib/esm/index.js'
+  console.log(compareVersions('11.0.0', '10.0.0'))
+  console.log(compare('11.0.0', '10.0.0', '>'))
+  console.log(satisfies('1.2.0', '^1.0.0'))
+  console.log(validate('11.0.0'))
+  console.log(validateStrict('11.0.0'))
+</script>
+```
+
+#### Legacy (UMD)
+
 If included directly in the browser, the functions above are available on the global window under the `compareVersions` object:
 
 ```html
-<script src=https://unpkg.com/compare-versions/lib/umd/index.js></script>
+<script src="https://unpkg.com/compare-versions/lib/umd/index.js"></script>
 <script>
-  const { compareVersions, compare, satisfies, validate } = window.compareVersions
+  const { compareVersions, compare, satisfies, validate, validateStrict } = window.compareVersions
   console.log(compareVersions('11.0.0', '10.0.0'))
   console.log(compare('11.0.0', '10.0.0', '>'))
   console.log(satisfies('1.2.0', '^1.0.0'))
