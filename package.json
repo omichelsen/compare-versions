@@ -22,13 +22,16 @@
   "scripts": {
     "build": "npm run build:esm && npm run build:umd",
     "build:esm": "tsc --module esnext --target es2017 --outDir lib/esm",
-    "build:umd": "rollup lib/esm/index.js --format umd --name compareVersions --sourcemap -o lib/umd/index.js",
+    "build:umd": "rollup lib/esm/index.js --format umd --name compareVersions --sourcemap -o lib/umd/index.cjs",
     "prepublishOnly": "npm run build",
     "test": "c8 --reporter=lcov mocha"
   },
-  "main": "./lib/umd/index.js",
-  "module": "./lib/esm/index.js",
-  "types": "./lib/esm/index.d.ts",
+  "type": "module",
+  "exports": {
+    "types": "./lib/esm/index.d.ts",
+    "require": "./lib/umd/index.cjs",
+    "default": "./lib/esm/index.js"
+  },
   "sideEffects": false,
   "files": [
     "lib",
