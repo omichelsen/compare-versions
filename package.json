@@ -26,9 +26,11 @@
     "prepublishOnly": "npm run build",
     "test": "c8 --reporter=lcov mocha"
   },
-  "main": "./lib/umd/index.js",
-  "module": "./lib/esm/index.js",
-  "types": "./lib/esm/index.d.ts",
+  "exports": {
+    "types": "./lib/esm/index.d.ts",
+    "require": "./lib/umd/index.js",
+    "default": "./lib/esm/index.js"
+  },
   "sideEffects": false,
   "files": [
     "lib",
