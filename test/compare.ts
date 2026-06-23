@@ -86,6 +86,11 @@ describe('compare versions', () => {
       ['1.0.0-beta.11', '1.0.0-beta.1', 1],
       ['1.0.0-beta.10', '1.0.0-beta.9', 1],
       ['1.0.0-beta.10', '1.0.0-beta.90', -1],
+      // section 11.4.4: a larger set of pre-release fields has a higher
+      // precedence than a smaller set when the preceding identifiers are equal.
+      ['1.0.0-alpha', '1.0.0-alpha.0', -1],
+      ['1.0.0-alpha.0', '1.0.0-alpha', 1],
+      ['1.0.0-rc.1', '1.0.0-rc.1.0', -1],
     ]);
   });
 
