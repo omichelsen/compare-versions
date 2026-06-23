@@ -22,7 +22,16 @@ export const compareVersions = (v1: string, v2: string) => {
 
   // validate pre-release
   if (p1 && p2) {
-    return compareSegments(p1.split('.'), p2.split('.'));
+    const s1 = p1.split('.');
+    const s2 = p2.split('.');
+    // SemVer 2.0.0 section 11.4.4: a larger set of pre-release fields has a
+    // higher precedence than a smaller set, if all of the preceding
+    // identifiers are equal.
+    for (let i = 0; i < Math.min(s1.length, s2.length); i++) {
+      const c = compareSegments([s1[i]], [s2[i]]);
+      if (c !== 0) return c;
+    }
+    return Math.sign(s1.length - s2.length);
   } else if (p1 || p2) {
     return p1 ? -1 : 1;
   }
