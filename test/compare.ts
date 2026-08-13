@@ -86,6 +86,15 @@ describe('compare versions', () => {
       ['1.0.0-beta.11', '1.0.0-beta.1', 1],
       ['1.0.0-beta.10', '1.0.0-beta.9', 1],
       ['1.0.0-beta.10', '1.0.0-beta.90', -1],
+      // section 11.4.3: a numeric identifier always has lower precedence than
+      // an alphanumeric one, and an identifier like "1a"/"0a" is alphanumeric
+      // (not the number it starts with).
+      ['1.0.0-1', '1.0.0-1a', -1],
+      ['1.0.0-1a', '1.0.0-1', 1],
+      ['1.0.0-0a', '1.0.0-0b', -1],
+      ['1.0.0-1', '1.0.0-0a', -1],
+      ['1.0.0-9', '1.0.0-9a', -1],
+      ['1.0.0-alpha.1', '1.0.0-alpha.1a', -1],
     ]);
   });
 

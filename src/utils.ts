@@ -22,20 +22,24 @@ export const validateAndParse = (version: string) => {
 
 const isWildcard = (s: string) => s === '*' || s === 'x' || s === 'X';
 
-const tryParse = (v: string) => {
-  const n = parseInt(v, 10);
-  return isNaN(n) ? v : n;
-};
-
-const forceType = (a: string | number, b: string | number) =>
-  typeof a !== typeof b ? [String(a), String(b)] : [a, b];
-
 const compareStrings = (a: string, b: string) => {
   if (isWildcard(a) || isWildcard(b)) return 0;
-  const [ap, bp] = forceType(tryParse(a), tryParse(b));
-  if (ap > bp) return 1;
-  if (ap < bp) return -1;
-  return 0;
+  // SemVer 2.0.0 section 11.4: identifiers made only of digits are compared
+  // numerically, identifiers with letters or hyphens are compared lexically in
+  // ASCII order, and a numeric identifier always has lower precedence than an
+  // alphanumeric one. `parseInt` read a leading-digit identifier like `0a` as
+  // the number 0, which both dropped that precedence rule and made `0a`, `0b`
+  // and `0` compare equal.
+  const aNum = /^\d+$/.test(a);
+  const bNum = /^\d+$/.test(b);
+  if (aNum && bNum) {
+    const na = Number(a);
+    const nb = Number(b);
+    return na > nb ? 1 : na < nb ? -1 : 0;
+  }
+  if (aNum) return -1;
+  if (bNum) return 1;
+  return a > b ? 1 : a < b ? -1 : 0;
 };
 
 export const compareSegments = (
