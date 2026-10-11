@@ -22,17 +22,13 @@ export const validateAndParse = (version: string) => {
 
 const isWildcard = (s: string) => s === '*' || s === 'x' || s === 'X';
 
-const tryParse = (v: string) => {
-  const n = parseInt(v, 10);
-  return isNaN(n) ? v : n;
-};
-
-const forceType = (a: string | number, b: string | number) =>
-  typeof a !== typeof b ? [String(a), String(b)] : [a, b];
+const tryParse = (v: string) => /^\d+$/.test(v) ? parseInt(v, 10) : v;
 
 const compareStrings = (a: string, b: string) => {
   if (isWildcard(a) || isWildcard(b)) return 0;
-  const [ap, bp] = forceType(tryParse(a), tryParse(b));
+  const ap = tryParse(a);
+  const bp = tryParse(b);
+  if (typeof ap !== typeof bp) return typeof ap === 'number' ? -1 : 1;
   if (ap > bp) return 1;
   if (ap < bp) return -1;
   return 0;
