@@ -46,9 +46,8 @@ export const satisfies = (version: string, range: string): boolean => {
   const v = [v1, v2, v3];
   const r = [r1, r2 ?? 'x', r3 ?? 'x'];
 
-  // validate pre-release
-  if (rp) {
-    if (!vp) return false;
+  // Prerelease candidates must match the range's prerelease core.
+  if (rp && vp) {
     if (compareSegments(v, r) !== 0) return false;
     if (compareSegments(vp.split('.'), rp.split('.')) === -1) return false;
   }
@@ -57,7 +56,8 @@ export const satisfies = (version: string, range: string): boolean => {
   const nonZero = r.findIndex((v) => v !== '0') + 1;
 
   // pointer to where segments can be >=
-  const i = op === '~' ? 2 : nonZero > 1 ? nonZero : 1;
+  // An all-zero prerelease caret range still fixes the patch segment.
+  const i = op === '~' ? 2 : nonZero || (rp ? 3 : 1);
 
   // before pointer must be equal
   if (compareSegments(v.slice(0, i), r.slice(0, i)) !== 0) return false;
